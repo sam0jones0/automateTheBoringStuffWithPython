@@ -1,7 +1,7 @@
 #! python3
 # regexStrip.py - Uses regex to emulate the strip() function
 
-import re, pyperclip
+import re
 
 workingString = '          this is a test string.        '
 
