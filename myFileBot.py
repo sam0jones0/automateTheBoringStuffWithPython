@@ -4,7 +4,7 @@
 # Usage - python myFileBot.py {showname}
 
 from pathlib import Path
-import os, sys, re, shutil
+import os, sys, re, shutil, send2trash
 
 showName = sys.argv[1]
 
@@ -39,4 +39,4 @@ for matches in downloadsFiles:
                 # Moves and renames episode in format {showname}SXXEXX
                 shutil.move(episodePath, tvFolder / f'{sys.argv[1].title()} {seasonAndEpisode}.mkv')
                 # Remove folder from Downloads folder
-                shutil.rmtree((Path(f'D:/Downloads/{episodeFolder.group()}')))
+                send2trash.send2trash((Path(f'D:/Downloads/{episodeFolder.group()}')))
