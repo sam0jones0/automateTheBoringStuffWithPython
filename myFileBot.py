@@ -28,7 +28,10 @@ if not tvFolder.exists():
 for matches in downloadsFiles:
     episodeFolder = showFolderRegex.search(matches)
     if episodeFolder != None:
-        episodeSubFolder = os.listdir(Path(f'D:/Downloads/{episodeFolder.group()}/'))
+        try:
+            episodeSubFolder = os.listdir(Path(f'D:/Downloads/{episodeFolder.group()}/'))
+        except NotADirectoryError:
+            continue
         for filesInSubfolder in episodeSubFolder:
             episode = showEpisodeRegex.search(filesInSubfolder)
             if episode != None:
@@ -39,4 +42,4 @@ for matches in downloadsFiles:
                 # Moves and renames episode in format {showname}SXXEXX
                 shutil.move(episodePath, tvFolder / f'{sys.argv[1].title()} {seasonAndEpisode}.mkv')
                 # Remove folder from Downloads folder
-                send2trash.send2trash((Path(f'D:/Downloads/{episodeFolder.group()}')))
+                send2trash.send2trash(str((Path(f'D:/Downloads/{episodeFolder.group()}'))))
